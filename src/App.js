@@ -1,24 +1,14 @@
-// import logo from "./logo.svg";
 import "./App.css";
 import { Input, Table } from "antd";
 import { getRepos } from "./user/Api";
 import { useState } from "react";
 
-function App(props) {
-  const { history } = props;
-  const onSuccess = (response) => console.log(response);
-  const onFailure = (response) => console.error(response);
+function App() {
   const [data, setData] = useState([]);
   const handleUserNameChange = (username) => {
     getRepos({ username })
       .then((response) => {
         setData(response.data);
-        // setPagination({
-        //   data,
-        //   total,
-        //   page: current_page,
-        //   perPage: per_page,
-        // });
       })
       .catch((error) => {
         const message = error.response
@@ -26,28 +16,8 @@ function App(props) {
           : "Terjadi kesalahan, silahkan coba lagi";
 
         console.log(message);
-        // toast.notify(({ onClose }) => (
-        //   <Alert color="danger" toggle={onClose}>
-        //     {message}
-        //   </Alert>
-        // ));
       });
   };
-
-  const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
-  ];
 
   const columns = [
     {
@@ -72,16 +42,6 @@ function App(props) {
       width: "30%",
       align: "center",
     },
-    {
-      title: "Action",
-      dataIndex: "id",
-      key: "id",
-      width: "5%",
-      align: "center",
-      render: (id) => {
-        return <button>Download</button>;
-      },
-    },
   ];
 
   return (
@@ -93,11 +53,6 @@ function App(props) {
       />
       <Table dataSource={data} columns={columns} />
     </div>
-    // <div className="App">
-    //   <button onClick={(e)=>
-    // {
-    //   e.preventDefault();
-    //   window.location.href='https://github.com/login/oauth/authorize?client_id=f9a530a7142f3aa727e4';}}>Sign in with Github</button>
   );
 }
 
