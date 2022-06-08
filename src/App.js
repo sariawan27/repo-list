@@ -2,6 +2,7 @@ import "./App.css";
 import { Input, Table } from "antd";
 import { getRepos } from "./user/Api";
 import { useState } from "react";
+import dayjs from "dayjs";
 
 function App() {
   const [data, setData] = useState([]);
@@ -41,6 +42,9 @@ function App() {
       key: "updated_at",
       width: "30%",
       align: "center",
+      render: (updated_at) => {
+        return dayjs(updated_at).format("MM/DD/YYYY h:mm:ss A");
+      },
     },
   ];
 
